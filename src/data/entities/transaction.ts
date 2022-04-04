@@ -1,6 +1,6 @@
 export interface Transaction {
   id?: string
   idUser: string
-  cash: string
+  cash: number
   description: string
 }
