@@ -12,7 +12,7 @@ export class TransferCashService implements TransferCashUseCase {
 
   async transfer ({ toIdUser, fromIdUser, cash }: TransferCashModel): Promise<void | Error> {
     const transactions = await this.transactionRepositoryMemory.allByUser(fromIdUser)
-    const fromUserCash = transactions.reduce(function (totalCash, transaction: Transaction) {
+    const fromUserCash = transactions.reduce((totalCash, transaction: Transaction) => {
       if (transaction.type === 'add') { totalCash += transaction.cash }
       if (transaction.type === 'remove') { totalCash -= transaction.cash }
       return 0
@@ -29,7 +29,7 @@ export class TransferCashService implements TransferCashUseCase {
     await this.removeCashUseCase.remove({
       idUser: fromIdUser,
       cash,
-      whyRemove: `Você transferiu ${cash} para ${toIdUser}`
+      whyRemove: `Você transferiu ${cash} para ${toIdUser}!`
     })
   }
 }
